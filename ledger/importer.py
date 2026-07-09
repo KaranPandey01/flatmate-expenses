@@ -110,14 +110,6 @@ def ensure_group_and_memberships(batch: ImportBatch):
     return group
 
 
-def is_member_on(person: Person, group: Group, d: date) -> bool:
-    return Membership.objects.filter(group=group, person=person).filter(
-        joined_at__lte=d
-    ).filter(
-        models_left_ok(d)
-    ).exists() if False else _is_member_on(person, group, d)
-
-
 def _is_member_on(person: Person, group: Group, d: date) -> bool:
     for m in Membership.objects.filter(group=group, person=person):
         if m.covers(d):
