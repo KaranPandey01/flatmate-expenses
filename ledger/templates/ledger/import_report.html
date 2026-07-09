@@ -1,0 +1,18 @@
+<!DOCTYPE html><html><head><title>Import Report</title>
+<style>body{font-family:sans-serif;max-width:1000px;margin:2rem auto;padding:0 1rem}
+table{border-collapse:collapse;width:100%;font-size:0.9rem}td,th{border:1px solid #ccc;padding:6px}
+.pending{background:#fff3cd}.auto{background:#d4edda}</style></head>
+<body><a href="/">&larr; back</a>
+<h1>Import Report</h1>
+{% if batch %}
+<p>{{ batch.filename }} — {{ batch.total_rows }} rows, {{ batch.anomalies_found }} anomalies,
+{{ batch.rows_pending_review }} pending review (Meera's approval requirement).</p>
+<table><tr><th>Row</th><th>Type</th><th>Status</th><th>Description</th><th>Policy applied</th></tr>
+{% for a in anomalies %}
+<tr class="{% if a.resolution_status == 'pending_review' %}pending{% else %}auto{% endif %}">
+<td>{{ a.source_row }}</td><td>{{ a.anomaly_type }}</td><td>{{ a.resolution_status }}</td>
+<td>{{ a.description }}</td><td>{{ a.policy_applied }}</td></tr>
+{% endfor %}
+</table>
+{% else %}<p>No import run yet.</p>{% endif %}
+</body></html>

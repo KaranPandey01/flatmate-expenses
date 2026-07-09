@@ -1,0 +1,12 @@
+<!DOCTYPE html><html><head><title>{{ person.name }}</title>
+<style>body{font-family:sans-serif;max-width:800px;margin:2rem auto;padding:0 1rem}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccc;padding:8px}</style></head>
+<body><a href="/">&larr; back</a>
+<h1>{{ person.name }} — net: {{ net|floatformat:2 }}</h1>
+<p>Rohan's "no magic numbers" requirement: every row below traces to a source expense/settlement.</p>
+<table><tr><th>Type</th><th>Row</th><th>Description</th><th>Amount</th><th>Detail</th></tr>
+{% for b in breakdown %}
+<tr><td>{{ b.type }}</td><td>{{ b.row }}</td><td>{{ b.description }}</td>
+<td>{{ b.amount }}</td><td>{{ b.detail }}</td></tr>
+{% endfor %}
+</table></body></html>

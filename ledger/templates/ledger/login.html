@@ -1,0 +1,7 @@
+<!DOCTYPE html><html><head><title>Login</title></head>
+<body style="font-family:sans-serif;max-width:400px;margin:4rem auto">
+<h1>Flatmate Expenses — Login</h1>
+<form method="post">{% csrf_token %}
+{{ form.as_p }}
+<button type="submit">Log in</button>
+</form></body></html>

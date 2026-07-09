@@ -1,0 +1,27 @@
+<!DOCTYPE html><html><head><title>Flatmate Balances</title>
+<style>body{font-family:sans-serif;max-width:800px;margin:2rem auto;padding:0 1rem}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccc;padding:8px;text-align:left}
+.pos{color:green}.neg{color:#b00}nav a{margin-right:1rem}</style></head>
+<body>
+<nav><a href="/">Dashboard</a><a href="/import-report/">Import Report</a><a href="/admin/">Admin</a>
+<a href="/logout/">Logout ({{request.user.username}})</a></nav>
+<h1>{{ group.name }} — Balances</h1>
+<h2>Individual net balance (Aisha's "one number per person")</h2>
+<table><tr><th>Person</th><th>Net (INR)</th><th></th></tr>
+{% for p, n in nets %}
+<tr><td>{{ p.name }}</td>
+<td class="{% if n > 0 %}pos{% else %}neg{% endif %}">{{ n|floatformat:2 }}
+{% if n > 0 %}(is owed){% else %}(owes){% endif %}</td>
+<td><a href="/person/{{ p.id }}/">see breakdown</a></td></tr>
+{% endfor %}
+</table>
+<h2>Suggested settlements (fewest payments to zero everyone out)</h2>
+<table><tr><th>From</th><th>To</th><th>Amount</th></tr>
+{% for d, c, amt in settlements %}
+<tr><td>{{ d.name }}</td><td>{{ c.name }}</td><td>{{ amt|floatformat:2 }}</td></tr>
+{% endfor %}
+</table>
+<p><em>Note: balances only include CONFIRMED rows. Rows still pending_review
+(duplicates, missing payer, invalid dates) are intentionally excluded until
+approved — see the Import Report.</em></p>
+</body></html>
