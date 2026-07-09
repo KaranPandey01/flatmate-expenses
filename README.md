@@ -6,7 +6,7 @@ Django app for tracking shared flat expenses, built for the Spreetail internship
 Python 3.12, Django 6.0, DRF, SQLite locally / Postgres in production (via `DATABASE_URL`), WhiteNoise for static files, Gunicorn for serving.
 
 ## AI tool used
-Claude (Anthropic), used as primary development collaborator per the assignment's explicit invitation. See `AI_USAGE.md` for prompts and specific corrections.
+Claude (Anthropic), used as assistant development collaborator per the assignment's explicit invitation. See `AI_USAGE.md` for prompts and specific corrections.
 
 ## Setup (local)
 ```bash
